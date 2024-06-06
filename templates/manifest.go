@@ -22,10 +22,15 @@ func ParseManifest(path string) (ViteManifest, error) {
 	return manifest, err
 }
 
+var IsProd = os.Getenv("GIN_ENV") == "production"
 var Manifest ViteManifest
 
 func init() {
-	manifest, err := ParseManifest("./assets/dist/.vite/manifest.json")
+	if !IsProd {
+		return
+	}
+
+	manifest, err := ParseManifest("./priv/assets/.vite/manifest.json")
 	if err != nil {
 		log.Fatal(err)
 	}

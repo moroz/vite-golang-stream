@@ -19,6 +19,9 @@ func main() {
 
 	r.Get("/", indexHandler)
 
+	fs := http.FileServer(http.Dir("./priv/assets/assets"))
+	r.Handle("/assets/*", http.StripPrefix("/assets/", fs))
+
 	log.Print("Listening on :3000")
 	log.Fatal(http.ListenAndServe(":3000", r))
 }

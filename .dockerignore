@@ -1,0 +1,4 @@
+.vscode
+assets/dist
+node_modules
+README.md

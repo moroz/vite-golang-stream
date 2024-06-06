@@ -23,4 +23,5 @@ go.work.sum
 
 server
 node_modules
+priv/assets
 **/*_templ.go

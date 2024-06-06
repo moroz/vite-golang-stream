@@ -1,12 +1,23 @@
 package templates
 
+templ embedAssets(manifest ViteManifest) {
+	<script type="module" src={ "/" + manifest["index.html"].File }></script>
+	for _, file := range manifest["index.html"].CssFiles {
+		<link rel="stylesheet" href={ "/" + file }/>
+	}
+}
+
 templ RootLayout(title string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
 			<meta charset="UTF-8"/>
 			<title>{ title }</title>
-			<script type="module" src="http://localhost:5173/src/main.ts"></script>
+			if IsProd {
+				@embedAssets(Manifest)
+			} else {
+				<script type="module" src="http://localhost:5173/src/main.ts"></script>
+			}
 		</head>
 		<body>
 			{ children... }
