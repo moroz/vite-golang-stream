@@ -1,16 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/moroz/vite-golang-stream/templates"
 )
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "<h1>Hello world!</h1>")
+	templates.Home().Render(r.Context(), w)
 }
 
 func main() {
